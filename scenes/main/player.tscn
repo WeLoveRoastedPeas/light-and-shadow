@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=3 uid="uid://bho2tfm6607hc"]
+
+[ext_resource type="Script" uid="uid://cp0434gl5uc4x" path="res://scenes/boot/boot.gd" id="1_2gs60"]
+[ext_resource type="Script" uid="uid://cwv5pofq7hvi0" path="res://scenes/main/player.gd" id="2_2hlsy"]
+[ext_resource type="Texture2D" uid="uid://12883oxtxp7h" path="res://assets/kenney_tiny-dungeon/Player_holder.png" id="2_wqvcu"]
+[ext_resource type="Texture2D" uid="uid://cxxst6yjwj53t" path="res://assets/kenney_tiny-dungeon/Player_holder_walk.png" id="3_2hlsy"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_riacy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_wqvcu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_2hlsy")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 3.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q2ck2"]
+
+[node name="Boot" type="Node2D"]
+script = ExtResource("1_2gs60")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -669.00006
+offset_top = -416.0
+offset_right = -573.00006
+offset_bottom = -393.0
+scale = Vector2(10, 10)
+text = "boot"
+
+[node name="Label" type="Label" parent="Label"]
+layout_mode = 0
+offset_left = 7.7
+offset_top = 22.899998
+offset_right = 103.7
+offset_bottom = 45.899998
+scale = Vector2(0.3, 0.3)
+text = "press enter to go to main menu"
+
+[node name="Player" type="Node2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="Player"]
+script = ExtResource("2_2hlsy")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player/Area2D"]
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_riacy")
+animation = &"Walk"
+frame_progress = 0.54957783
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D"]
+position = Vector2(0, 4)
+scale = Vector2(2.5, 2.75)
+shape = SubResource("RectangleShape2D_q2ck2")
