@@ -6,31 +6,40 @@
 [node name="Boot" type="Node2D"]
 script = ExtResource("1_6cbyf")
 
+[node name="Label3" type="Label" parent="."]
+offset_left = 318.0
+offset_top = 338.99997
+offset_right = 562.0
+offset_bottom = 361.99997
+scale = Vector2(3, 3)
+text = "press enter to go to main menu"
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 375.0
+offset_top = 450.0
+offset_right = 669.0
+offset_bottom = 539.0
+scale = Vector2(2, 2)
+text = "Does this work in web?"
+
 [node name="Label" type="Label" parent="."]
-offset_left = 35.0
-offset_top = 77.00001
-offset_right = 131.0
-offset_bottom = 100.00001
+offset_left = 63.0
+offset_top = 77.0
+offset_right = 102.0
+offset_bottom = 100.0
 scale = Vector2(10, 10)
 text = "boot"
 
-[node name="Label" type="Label" parent="Label"]
-layout_mode = 0
-offset_left = 11.8
-offset_top = 25.300001
-offset_right = 255.8
-offset_bottom = 48.300003
-scale = Vector2(0.3, 0.3)
-text = "press enter to go to main menu"
-
 [node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(521, 169)
+position = Vector2(602, 137)
+scale = Vector2(1.6835936, 1.5351564)
 texture = ExtResource("2_cp6y4")
 
 [node name="Icon2" type="Sprite2D" parent="."]
-position = Vector2(690, 258)
+position = Vector2(814, 246)
 texture = ExtResource("2_cp6y4")
 
 [node name="Icon3" type="Sprite2D" parent="."]
-position = Vector2(308, 476)
+position = Vector2(147, 503)
+scale = Vector2(1.6015625, 1.6875)
 texture = ExtResource("2_cp6y4")
