@@ -1,9 +1,19 @@
-[gd_scene load_steps=7 format=3 uid="uid://bho2tfm6607hc"]
+[gd_scene load_steps=14 format=3 uid="uid://bho2tfm6607hc"]
 
 [ext_resource type="Script" uid="uid://cp0434gl5uc4x" path="res://scenes/boot/boot.gd" id="1_2gs60"]
 [ext_resource type="Script" uid="uid://cwv5pofq7hvi0" path="res://scenes/main/player.gd" id="2_2hlsy"]
+[ext_resource type="Script" uid="uid://b4ddn4hmoix2b" path="res://scenes/main/main.gd" id="2_u2d4w"]
 [ext_resource type="Texture2D" uid="uid://12883oxtxp7h" path="res://assets/kenney_tiny-dungeon/Player_holder.png" id="2_wqvcu"]
 [ext_resource type="Texture2D" uid="uid://cxxst6yjwj53t" path="res://assets/kenney_tiny-dungeon/Player_holder_walk.png" id="3_2hlsy"]
+[ext_resource type="Script" uid="uid://b7763hwi8fvxm" path="res://scenes/main/foe.gd" id="5_q2ck2"]
+[ext_resource type="Texture2D" uid="uid://bu1500ulvatph" path="res://assets/kenney_tiny-dungeon/Ghost_holder.png" id="5_riacy"]
+[ext_resource type="Texture2D" uid="uid://qe6afjk8sq2k" path="res://assets/kenney_tiny-dungeon/Ghost_holder_walk.png" id="6_q2ck2"]
+
+[sub_resource type="Curve2D" id="Curve2D_q2ck2"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1, 7, 0, 0, 0, 0, 1, 151, 0, 0, 0, 0, 153, 187, 0, 0, 0, 0, 228, 66, 0, 0, 0, 0, 243, -67, 0, 0, 0, 0, 91, -164, 0, 0, 0, 0, -201, -129, 0, 0, 0, 0, -256, 62, 0, 0, 0, 0, -84, 300, 0, 0, 0, 0, 153, 366, 0, 0, 0, 0, 380, 272, 0, 0, 0, 0, 465, 101, 0, 0, 0, 0, 461, -71, 0, 0, 0, 0, 1, 7)
+}
+point_count = 14
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_riacy"]
 animations = [{
@@ -16,10 +26,26 @@ animations = [{
 }],
 "loop": true,
 "name": &"Walk",
-"speed": 3.0
+"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q2ck2"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u2d4w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_riacy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_q2ck2")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_riacy"]
 
 [node name="Boot" type="Node2D"]
 script = ExtResource("1_2gs60")
@@ -41,18 +67,57 @@ offset_bottom = 45.899998
 scale = Vector2(0.3, 0.3)
 text = "press enter to go to main menu"
 
-[node name="Player" type="Node2D" parent="."]
+[node name="Main" type="Node" parent="."]
+script = ExtResource("2_u2d4w")
 
-[node name="Area2D" type="Area2D" parent="Player"]
+[node name="Foe_Time" type="Timer" parent="Main"]
+wait_time = 0.5
+
+[node name="Foe_Path" type="Path2D" parent="Main"]
+curve = SubResource("Curve2D_q2ck2")
+
+[node name="Foe_Spawn" type="PathFollow2D" parent="Main/Foe_Path"]
+
+[node name="Start_Time" type="Timer" parent="Main"]
+wait_time = 2.0
+one_shot = true
+
+[node name="Score_Time" type="Timer" parent="Main"]
+
+[node name="Start_Mark" type="Marker2D" parent="Main"]
+position = Vector2(240, 450)
+gizmo_extents = 46.7
+
+[node name="Player" type="Node2D" parent="Main"]
+
+[node name="Area2D" type="Area2D" parent="Main/Player"]
 script = ExtResource("2_2hlsy")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player/Area2D"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Main/Player/Area2D"]
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_riacy")
 animation = &"Walk"
-frame_progress = 0.54957783
+frame_progress = 0.24457511
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Main/Player/Area2D"]
 position = Vector2(0, 4)
 scale = Vector2(2.5, 2.75)
 shape = SubResource("RectangleShape2D_q2ck2")
+
+[node name="Foe" type="Node2D" parent="Main"]
+
+[node name="RigidBody2D" type="RigidBody2D" parent="Main/Foe"]
+gravity_scale = 0.0
+script = ExtResource("5_q2ck2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Main/Foe/RigidBody2D"]
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_u2d4w")
+animation = &"walk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Main/Foe/RigidBody2D"]
+position = Vector2(0, 4)
+scale = Vector2(2.5, 2.75)
+shape = SubResource("RectangleShape2D_riacy")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Main/Foe/RigidBody2D"]
