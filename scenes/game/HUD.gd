@@ -1,13 +1,13 @@
 extends MarginContainer
 
-@export var health : Node
+@export var player : Node
 
 var is_alive: bool = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	health.connect("health_changed", _on_health_changed)
-	health.connect("died", _on_died)
+	player.connect("health_changed", _on_health_changed)
+	player.connect("died", _on_died)
 	
 func _on_died(_reason: String) -> void:
 	is_alive = false

@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://cqqh220hmp8ga"]
+
+[ext_resource type="Script" uid="uid://dmmu61h654geb" path="res://scenes/game/player.gd" id="1_68xwl"]
+[ext_resource type="Texture2D" uid="uid://cagfdantp2um4" path="res://icon.svg" id="2_wwvfn"]
+[ext_resource type="Script" uid="uid://dicu7xs70ehjc" path="res://scenes/game/player_movement.gd" id="3_t8yk2"]
+[ext_resource type="Script" uid="uid://dgxfe20ewfkev" path="res://scenes/game/health.gd" id="4_m5ugi"]
+[ext_resource type="PackedScene" uid="uid://d0qmtm8et35i1" path="res://scenes/game/HurtBox.tscn" id="5_3vq1g"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gg4pt"]
+
+[node name="Player" type="Node2D"]
+script = ExtResource("1_68xwl")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(47, 45.000004)
+scale = Vector2(0.7050781, 0.6855469)
+texture = ExtResource("2_wwvfn")
+
+[node name="PlayerMovement" type="Node" parent="." node_paths=PackedStringArray("entity")]
+script = ExtResource("3_t8yk2")
+entity = NodePath("..")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("4_m5ugi")
+
+[node name="HurtBox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("5_3vq1g")]
+health = NodePath("../Health")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(49, 43)
+rotation = 3.1415925
+scale = Vector2(3.8880742, -3.8153589)
+shape = SubResource("CircleShape2D_gg4pt")
+debug_color = Color(0.8545906, 0.36128378, 0.24315009, 0.41960785)

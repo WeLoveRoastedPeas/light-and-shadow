@@ -1,42 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://birqbchmyle74"]
+[gd_scene load_steps=4 format=3 uid="uid://birqbchmyle74"]
 
-[ext_resource type="Script" uid="uid://dmmu61h654geb" path="res://scenes/game/player.gd" id="1_7qcb4"]
-[ext_resource type="Texture2D" uid="uid://cagfdantp2um4" path="res://icon.svg" id="1_klkup"]
-[ext_resource type="Script" uid="uid://dicu7xs70ehjc" path="res://scenes/game/player_movement.gd" id="2_m44fu"]
-[ext_resource type="Script" uid="uid://dgxfe20ewfkev" path="res://scenes/game/health.gd" id="3_vrspl"]
-[ext_resource type="PackedScene" uid="uid://d0qmtm8et35i1" path="res://scenes/game/HurtBox.tscn" id="6_365ku"]
+[ext_resource type="PackedScene" uid="uid://cqqh220hmp8ga" path="res://scenes/game/player.tscn" id="1_vrspl"]
 [ext_resource type="PackedScene" uid="uid://dp5w25itgwj35" path="res://scenes/game/trap.tscn" id="6_gg4pt"]
 [ext_resource type="Script" uid="uid://b31h6xsk0u5r4" path="res://scenes/game/HUD.gd" id="7_gg4pt"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_gg4pt"]
-
 [node name="Game" type="Node2D"]
 
-[node name="Player" type="Node2D" parent="."]
+[node name="Player" parent="." instance=ExtResource("1_vrspl")]
 position = Vector2(33, 29)
-script = ExtResource("1_7qcb4")
-
-[node name="Sprite" type="Sprite2D" parent="Player"]
-position = Vector2(47, 45.000004)
-scale = Vector2(0.7050781, 0.6855469)
-texture = ExtResource("1_klkup")
-
-[node name="PlayerMovement" type="Node" parent="Player" node_paths=PackedStringArray("entity")]
-script = ExtResource("2_m44fu")
-entity = NodePath("..")
-
-[node name="Health" type="Node" parent="Player"]
-script = ExtResource("3_vrspl")
-
-[node name="HurtBox" parent="Player" node_paths=PackedStringArray("health") instance=ExtResource("6_365ku")]
-health = NodePath("../Health")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/HurtBox"]
-position = Vector2(49, 43)
-rotation = 3.1415925
-scale = Vector2(3.8880742, -3.8153589)
-shape = SubResource("CircleShape2D_gg4pt")
-debug_color = Color(0.8545906, 0.36128378, 0.24315009, 0.41960785)
 
 [node name="Trap" parent="." instance=ExtResource("6_gg4pt")]
 position = Vector2(405, 167)
@@ -47,14 +18,14 @@ position = Vector2(188, 459)
 [node name="Trap3" parent="." instance=ExtResource("6_gg4pt")]
 position = Vector2(638, 338)
 
-[node name="HUD" type="MarginContainer" parent="." node_paths=PackedStringArray("health")]
+[node name="HUD" type="MarginContainer" parent="." node_paths=PackedStringArray("player")]
 offset_left = 648.0
 offset_top = 31.0
 offset_right = 706.0
 offset_bottom = 71.0
 scale = Vector2(3, 3)
 script = ExtResource("7_gg4pt")
-health = NodePath("../Player/Health")
+player = NodePath("../Player")
 
 [node name="HP" type="Label" parent="HUD"]
 layout_mode = 2
