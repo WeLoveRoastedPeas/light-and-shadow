@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://dp5w25itgwj35"]
+
+[ext_resource type="Texture2D" uid="uid://cagfdantp2um4" path="res://icon.svg" id="1_pqqa8"]
+[ext_resource type="PackedScene" uid="uid://01e07rjtd6wq" path="res://scenes/game/HitBox.tscn" id="2_0sbnl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gg4pt"]
+
+[node name="Trap" type="Node2D"]
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(47, 45.000004)
+rotation = 3.024055
+scale = Vector2(1.1408951, 1.1092914)
+texture = ExtResource("1_pqqa8")
+
+[node name="HitBox" parent="." instance=ExtResource("2_0sbnl")]
+damage = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(49, 43)
+rotation = 3.1415925
+scale = Vector2(7.248076, -7.3353615)
+shape = SubResource("CircleShape2D_gg4pt")
+debug_color = Color(0.18731701, 0.62631464, 0.42194313, 0.41960785)

@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://ddt7tnl641c66"]
+
+[ext_resource type="Script" uid="uid://cr7u8krjexg3s" path="res://scenes/game/entity_body.gd" id="1_aepvt"]
+[ext_resource type="Script" uid="uid://dgxfe20ewfkev" path="res://scenes/game/health.gd" id="2_h55tn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_klkup"]
+
+[node name="EntityBody" type="Area2D"]
+script = ExtResource("1_aepvt")
+
+[node name="Health" type="Node" parent="." node_paths=PackedStringArray("entity")]
+script = ExtResource("2_h55tn")
+entity = NodePath("..")
+
+[node name="HurtBox" type="CollisionShape2D" parent="."]
+position = Vector2(47, 45)
+scale = Vector2(4, 4)
+shape = SubResource("CircleShape2D_klkup")
+debug_color = Color(0.7789443, 0.38465458, 0.5591572, 0.41960785)
