@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://dhhpvu8xfc2i7"]
+
+[ext_resource type="Script" uid="uid://b7763hwi8fvxm" path="res://scenes/main/foe.gd" id="1_2bv11"]
+[ext_resource type="Texture2D" uid="uid://bu1500ulvatph" path="res://assets/kenney_tiny-dungeon/Ghost_holder.png" id="2_q6l2y"]
+[ext_resource type="Texture2D" uid="uid://qe6afjk8sq2k" path="res://assets/kenney_tiny-dungeon/Ghost_holder_walk.png" id="3_hjxf8"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u2d4w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_q6l2y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_hjxf8")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_riacy"]
+
+[node name="Foe" type="Node2D"]
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+gravity_scale = 0.0
+script = ExtResource("1_2bv11")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="RigidBody2D"]
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_u2d4w")
+animation = &"walk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2(0, 4)
+scale = Vector2(2.5, 2.75)
+shape = SubResource("RectangleShape2D_riacy")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="RigidBody2D"]
