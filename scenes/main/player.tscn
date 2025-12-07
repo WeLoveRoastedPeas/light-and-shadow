@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://bho2tfm6607hc"]
 
-[ext_resource type="Script" uid="uid://cp0434gl5uc4x" path="res://scenes/boot/boot.gd" id="1_2gs60"]
+[ext_resource type="Script" uid="uid://bqmkxec615xnm" path="res://scenes/main/boot.gd" id="1_2hlsy"]
 [ext_resource type="Script" uid="uid://cwv5pofq7hvi0" path="res://scenes/main/player.gd" id="2_2hlsy"]
 [ext_resource type="Texture2D" uid="uid://12883oxtxp7h" path="res://assets/kenney_tiny-dungeon/Player_holder.png" id="2_wqvcu"]
 [ext_resource type="Texture2D" uid="uid://cxxst6yjwj53t" path="res://assets/kenney_tiny-dungeon/Player_holder_walk.png" id="3_2hlsy"]
@@ -29,7 +29,8 @@ _data = {
 point_count = 14
 
 [node name="Boot" type="Node2D"]
-script = ExtResource("1_2gs60")
+script = ExtResource("1_2hlsy")
+foe_scene = ExtResource("3_riacy")
 
 [node name="Label" type="Label" parent="."]
 offset_left = -669.00006
@@ -48,21 +49,16 @@ offset_bottom = 45.899998
 scale = Vector2(0.3, 0.3)
 text = "press enter to go to main menu"
 
-[node name="Foe_Time" type="Timer" parent="Label"]
-wait_time = 0.5
-
-[node name="Player" type="Node2D" parent="."]
-
-[node name="Area2D" type="Area2D" parent="Player"]
+[node name="Player" type="Area2D" parent="."]
 script = ExtResource("2_2hlsy")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player/Area2D"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_riacy")
 animation = &"Walk"
-frame_progress = 0.9667679
+frame_progress = 0.5386016
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 position = Vector2(0, 4)
 scale = Vector2(2.5, 2.75)
 shape = SubResource("RectangleShape2D_q2ck2")
@@ -80,8 +76,15 @@ curve = SubResource("Curve2D_q2ck2")
 position = Vector2(1, 7)
 rotation = 1.5707964
 
+[node name="Foe_Time" type="Timer" parent="."]
+wait_time = 0.5
+
 [node name="Start_Time" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
 
 [node name="Score_Time" type="Timer" parent="."]
+
+[connection signal="timeout" from="Foe_Time" to="." method="_on_foe_time_timeout"]
+[connection signal="timeout" from="Start_Time" to="." method="_on_start_time_timeout"]
+[connection signal="timeout" from="Score_Time" to="." method="_on_score_time_timeout"]

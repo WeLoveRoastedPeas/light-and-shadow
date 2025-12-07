@@ -34,8 +34,8 @@ func _process(frame_delta: float) -> void:
 	position += velocity * frame_delta
 	position = position.clamp(Vector2.ZERO, screen_size)
 
-func start(location: Vector2) -> void:
-	position = location
+func start() -> void:
+	position = Vector2(300, 300)
 	show()
 	$CollisionShape2D.disabled = false
 
