@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var foe_scene: PackedScene
+@export var foe_scene: PackedScene = preload("res://scenes/main/foe.tscn")
 var score: int
 
 # Called when the node enters the scene tree for the first time.
@@ -24,7 +24,8 @@ func new_game() -> void:
 
 func _on_foe_time_timeout() -> void:
 	var new_foe: Node2D = foe_scene.instantiate()
-	
+	print(new_foe)
+	print(new_foe.position)
 	var spawn_location: PathFollow2D = $Foe_Path/Foe_Spawn
 	spawn_location.progress_ratio = randf()
 	new_foe.position = spawn_location.position
@@ -34,7 +35,7 @@ func _on_foe_time_timeout() -> void:
 	new_foe.rotation = direction;
 	
 	var velocity: Vector2 = Vector2(randf_range(150.0, 250.0), 0.0)
-	new_foe.linear_velocity = velocity.rotated(direction)
+	new_foe.get_child(0).linear_velocity = velocity.rotated(direction)
 	add_child(new_foe)
 
 func _on_score_time_timeout() -> void:

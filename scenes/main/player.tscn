@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://bho2tfm6607hc"]
 
 [ext_resource type="Script" uid="uid://bqmkxec615xnm" path="res://scenes/main/boot.gd" id="1_2hlsy"]
-[ext_resource type="Script" uid="uid://cwv5pofq7hvi0" path="res://scenes/main/player.gd" id="2_2hlsy"]
+[ext_resource type="Script" path="res://scenes/main/player.gd" id="2_2hlsy"]
 [ext_resource type="Texture2D" uid="uid://12883oxtxp7h" path="res://assets/kenney_tiny-dungeon/Player_holder.png" id="2_wqvcu"]
 [ext_resource type="Texture2D" uid="uid://cxxst6yjwj53t" path="res://assets/kenney_tiny-dungeon/Player_holder_walk.png" id="3_2hlsy"]
 [ext_resource type="PackedScene" uid="uid://dhhpvu8xfc2i7" path="res://scenes/main/foe.tscn" id="3_riacy"]
@@ -30,7 +30,6 @@ point_count = 14
 
 [node name="Boot" type="Node2D"]
 script = ExtResource("1_2hlsy")
-foe_scene = ExtResource("3_riacy")
 
 [node name="Label" type="Label" parent="."]
 offset_left = -669.00006
