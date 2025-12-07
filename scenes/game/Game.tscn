@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://birqbchmyle74"]
+[gd_scene load_steps=9 format=3 uid="uid://birqbchmyle74"]
 
 [ext_resource type="Script" uid="uid://dmmu61h654geb" path="res://scenes/game/player.gd" id="1_7qcb4"]
 [ext_resource type="Texture2D" uid="uid://cagfdantp2um4" path="res://icon.svg" id="1_klkup"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://dgxfe20ewfkev" path="res://scenes/game/health.gd" id="3_vrspl"]
 [ext_resource type="PackedScene" uid="uid://d0qmtm8et35i1" path="res://scenes/game/HurtBox.tscn" id="6_365ku"]
 [ext_resource type="PackedScene" uid="uid://dp5w25itgwj35" path="res://scenes/game/trap.tscn" id="6_gg4pt"]
+[ext_resource type="Script" uid="uid://b31h6xsk0u5r4" path="res://scenes/game/HUD.gd" id="7_gg4pt"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gg4pt"]
 
@@ -45,3 +46,16 @@ position = Vector2(188, 459)
 
 [node name="Trap3" parent="." instance=ExtResource("6_gg4pt")]
 position = Vector2(638, 338)
+
+[node name="HUD" type="MarginContainer" parent="." node_paths=PackedStringArray("health")]
+offset_left = 648.0
+offset_top = 31.0
+offset_right = 706.0
+offset_bottom = 71.0
+scale = Vector2(3, 3)
+script = ExtResource("7_gg4pt")
+health = NodePath("../Player/Health")
+
+[node name="HP" type="Label" parent="HUD"]
+layout_mode = 2
+text = "HP: 100"
