@@ -11,4 +11,4 @@ offset_top = 101.0
 offset_right = 240.0
 offset_bottom = 124.0
 scale = Vector2(3, 3)
-text = "MAIN MENU"
+text = "MAIN MENU $Global.foo"

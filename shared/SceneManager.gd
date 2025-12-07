@@ -1,12 +1,11 @@
-extends Node2D
+extends Node
 
-
+@export var scenes: Dictionary[String, Node] = {}
+	
 # Called when the node enters the scene tree for the first time.
-@onready var label: Label = $Label
 func _ready() -> void:
-	label.text = Global.foo
-
+	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	pass
